@@ -3,52 +3,370 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A380 解剖图集</title>
+<title>A380 解剖图集 · 等轴测交互技术图</title>
 <style>
-:root{--bg:#f6f5f1;--card:#fff;--text:#1d1d1b;--muted:#6b6a66;--line:#d8d6cf;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"PingFang SC","Noto Sans CJK SC","Noto Sans SC",monospace}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 "PingFang SC","Noto Sans CJK SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif}
-main{max-width:1120px;margin:0 auto;padding:40px 24px 56px}
-header{margin-bottom:28px}
-.eyebrow{font:11px/1 var(--mono);letter-spacing:.12em;color:var(--muted);margin:0 0 10px}
-h1{font-size:28px;font-weight:600;letter-spacing:.04em;margin:0 0 8px}
-header p{margin:0;color:var(--muted);max-width:44em}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-a.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);color:inherit;text-decoration:none;transition:border-color .15s}
-a.card:hover,a.card:focus-visible{border-color:#8a8983;outline:none}
-.card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;background:#fbfaf7;border-bottom:1px solid var(--line)}
-.card .txt{padding:12px 14px 14px}
-.card .no{font:11px/1 var(--mono);letter-spacing:.08em;color:var(--muted)}
-.card h2{font-size:16px;font-weight:600;margin:6px 0 4px}
-.card p{margin:0;font-size:13px;color:var(--muted)}
-a.card.feature{grid-column:1/-1;flex-direction:row}
-.feature img{width:68%;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line)}
-.feature .txt{flex:1;padding:24px;display:flex;flex-direction:column;justify-content:center}
-.feature h2{font-size:22px}
-.feature p{font-size:14px}
-.about{grid-column:span 2;border:1px solid var(--line);padding:22px 24px;display:flex;flex-direction:column;justify-content:center;font-size:13px;color:var(--muted)}.about h2{font-size:15px;font-weight:600;color:var(--text);margin:0 0 8px}.about p{margin:0 0 6px}
-@media (max-width:860px){.about{grid-column:1/-1}}
-@media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){main{padding:28px 14px 40px}.grid{grid-template-columns:1fr}a.card.feature{flex-direction:column}.feature img{width:100%;border-right:0;border-bottom:1px solid var(--line)}.feature .txt{padding:14px}}
+:root {
+  --bg: #f6f5f1;
+  --card: #fff;
+  --text: #1d1d1b;
+  --muted: #6b6a66;
+  --line: #d8d6cf;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", monospace;
+  --primary: #18181a;
+  --primary-hover: #333336;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14.5px/1.55 "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+main {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+header {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.eyebrow {
+  font: 11px/1 var(--mono);
+  letter-spacing: .12em;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  margin: 0;
+  color: var(--text);
+}
+header p.intro {
+  margin: 0;
+  color: var(--muted);
+  max-width: 52em;
+  font-size: 13.5px;
+}
+.header-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  transition: all .15s ease;
+}
+.header-action:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Grid Layout - Responsive space utilization */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+a.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+a.card:hover,
+a.card:focus-visible {
+  border-color: #8a8983;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  outline: none;
+}
+.card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  background: #fbfaf7;
+  border-bottom: 1px solid var(--line);
+}
+.card .txt {
+  padding: 12px 14px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card .no {
+  font: 11px/1 var(--mono);
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+.card h2 {
+  font-size: 15.5px;
+  font-weight: 600;
+  margin: 6px 0 4px;
+}
+.card p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Feature Card (Whole Aircraft) */
+a.card.feature {
+  grid-column: 1 / -1;
+  flex-direction: row;
+}
+.feature img {
+  width: 65%;
+  aspect-ratio: auto;
+  border-bottom: 0;
+  border-right: 1px solid var(--line);
+}
+.feature .txt {
+  flex: 1;
+  padding: 24px 28px;
+  justify-content: center;
+}
+.feature h2 {
+  font-size: 22px;
+  margin: 8px 0 6px;
+}
+.feature p {
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.feature .badge {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 14px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Collapsible About Section */
+.about-collapsible {
+  grid-column: 1 / -1;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 13px;
+  color: var(--muted);
+}
+.about-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: var(--text);
+  background: #fdfdfc;
+  transition: background .15s;
+}
+.about-summary:hover {
+  background: #f9f8f5;
+}
+.about-summary::-webkit-details-marker {
+  display: none;
+}
+.about-summary::marker {
+  display: none;
+  content: "";
+}
+.about-arrow {
+  transition: transform .2s ease;
+  font-size: 12px;
+  color: var(--muted);
+}
+.about-collapsible[open] .about-arrow {
+  transform: rotate(180deg);
+}
+.about-body {
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+  line-height: 1.6;
+}
+.about-body p {
+  margin: 0 0 6px;
+}
+.about-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tablet & Mobile Breakpoints */
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  a.card.feature {
+    flex-direction: column;
+  }
+  .feature img {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .feature .txt {
+    padding: 16px;
+  }
+}
+@media (max-width: 520px) {
+  main {
+    padding: 14px 10px 32px;
+  }
+  h1 {
+    font-size: 21px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .card .txt {
+    padding: 10px 12px 12px;
+  }
+  .header-action {
+    width: 100%;
+    justify-content: center;
+  }
+}
 </style>
 </head>
 <body>
 <main>
 <header>
-<p class="eyebrow">AIRBUS A380-800 · 等轴测解剖</p>
-<h1>A380 解剖图集</h1>
-<p>八张可交互的示意图：一张整机总图，七张分区详图。悬停查看部件，点击或按键拆解、收放机构。</p>
+  <div class="header-top">
+    <div>
+      <p class="eyebrow">AIRBUS A380-800 · 等轴测解剖图集</p>
+      <h1>A380 解剖图集</h1>
+    </div>
+    <a href="a380-full/a380-full-light.html" class="header-action">
+      <span>直接进入整机全景图 (图 8)</span>
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"/></svg>
+    </a>
+  </div>
+  <p class="intro">八张可交互的示意图：一张整机总图，七张分区详图。悬停查看部件，点击或按键拆解、收放机构。</p>
 </header>
 <div class="grid">
-<a class="card feature" href="a380-full/a380-full-light.html"><img src="a380-full/shots/m4-flaps-gear-door-light.png" alt="A380 整机示意图，起落架收起、襟翼放下、货舱门开启"><div class="txt"><span class="no">图 8</span><h2>整机</h2><p>按实机外廓尺寸绘制的整架 A380，带双层客舱剖视窗；可收放起落架、放下襟翼、打开货舱门，并拆解为五段机身，八个区域链接到各详图。</p></div></a>
-<a class="card" href="a380-section/a380-section-light.html"><img src="a380-section/shots/s8-rest-light.png" alt="客舱剖面示意图" loading="lazy"><div class="txt"><span class="no">图 1</span><h2>客舱剖面</h2><p>双层椭圆截面：主舱、上舱、货舱与楼梯、厨房、盥洗室。</p></div></a>
-<a class="card" href="a380-cockpit/a380-cockpit-light.html"><img src="a380-cockpit/shots/s4-rest-light.png" alt="机头驾驶舱示意图" loading="lazy"><div class="txt"><span class="no">图 2</span><h2>机头驾驶舱</h2><p>位于两层甲板之间的驾驶舱、雷达罩与前起落架。</p></div></a>
-<a class="card" href="a380-wing-root/a380-wing-root-light.html"><img src="a380-wing-root/shots/s4-rest-light.png" alt="翼根起落架示意图" loading="lazy"><div class="txt"><span class="no">图 3</span><h2>翼根起落架</h2><p>中央翼盒、翼下与机身主起落架及其收放。</p></div></a>
-<a class="card" href="a380-engine/a380-engine-light.html"><img src="a380-engine/shots/s3-rest-light.png" alt="发动机示意图" loading="lazy"><div class="txt"><span class="no">图 4</span><h2>发动机</h2><p>遄达 900 涡扇发动机：风扇、核心机、短舱与反推。</p></div></a>
-<a class="card" href="a380-tail/a380-tail-light.html"><img src="a380-tail/shots/s3-rest-light.png" alt="尾段 APU 示意图" loading="lazy"><div class="txt"><span class="no">图 5</span><h2>尾段 APU</h2><p>垂尾、水平安定面与尾锥内的辅助动力装置。</p></div></a>
-<a class="card" href="a380-cargo/a380-cargo-light.html"><img src="a380-cargo/shots/s2-door-open-light.png" alt="货舱门示意图，舱门开启" loading="lazy"><div class="txt"><span class="no">图 6</span><h2>货舱门</h2><p>前下货舱：上铰链货舱门、LD3 集装箱与滚棒地板。</p></div></a>
-<a class="card" href="a380-flaps/a380-flaps-light.html"><img src="a380-flaps/shots/s2-rest-light.png" alt="后缘襟翼示意图" loading="lazy"><div class="txt"><span class="no">图 7</span><h2>后缘襟翼</h2><p>富勒襟翼的后移下偏与扰流板升起。</p></div></a>
-<section class="about"><h2>关于这套图集</h2><p>均为示意图：外廓尺寸取自空客 Aircraft Characteristics 与 Facts &amp; Figures，截面形状、翼型、内饰排布等细节为示意。</p><p>每张图都有浅色与深色两版；各图的资料来源与示意说明见对应目录的 README。</p></section>
+  <a class="card feature" href="a380-full/a380-full-light.html">
+    <img src="a380-full/shots/m4-flaps-gear-door-light.png" alt="A380 整机示意图，起落架收起、襟翼放下、货舱门开启">
+    <div class="txt">
+      <span class="no">图 8</span>
+      <h2>整机全景拆解</h2>
+      <p>按实机外廓尺寸绘制的整架 A380，带双层客舱剖视窗；可收放起落架、放下襟翼、打开货舱门，并拆解为五段机身，八个区域链接到各详图。</p>
+      <span class="badge">进入整机交互拆解 ↗</span>
+    </div>
+  </a>
+
+  <a class="card" href="a380-section/a380-section-light.html">
+    <img src="a380-section/shots/s8-rest-light.png" alt="客舱剖面示意图" loading="lazy">
+    <div class="txt">
+      <span class="no">图 1</span>
+      <h2>客舱剖面</h2>
+      <p>双层椭圆截面：主舱、上舱、货舱与楼梯、厨房、盥洗室。</p>
+    </div>
+  </a>
+
+  <a class="card" href="a380-cockpit/a380-cockpit-light.html">
+    <img src="a380-cockpit/shots/s4-rest-light.png" alt="机头驾驶舱示意图" loading="lazy">
+    <div class="txt">
+      <span class="no">图 2</span>
+      <h2>机头驾驶舱</h2>
+      <p>位于两层甲板之间的驾驶舱、雷达罩与前起落架。</p>
+    </div>
+  </a>
+
+  <a class="card" href="a380-wing-root/a380-wing-root-light.html">
+    <img src="a380-wing-root/shots/s4-rest-light.png" alt="翼根起落架示意图" loading="lazy">
+    <div class="txt">
+      <span class="no">图 3</span>
+      <h2>翼根起落架</h2>
+      <p>中央翼盒、翼下与机身主起落架及其收放。</p>
+    </div>
+  </a>
+
+  <a class="card" href="a380-engine/a380-engine-light.html">
+    <img src="a380-engine/shots/s3-rest-light.png" alt="发动机示意图" loading="lazy">
+    <div class="txt">
+      <span class="no">图 4</span>
+      <h2>发动机</h2>
+      <p>遄达 900 涡扇发动机：风扇、核心机、短舱与反推。</p>
+    </div>
+  </a>
+
+  <a class="card" href="a380-tail/a380-tail-light.html">
+    <img src="a380-tail/shots/s3-rest-light.png" alt="尾段 APU 示意图" loading="lazy">
+    <div class="txt">
+      <span class="no">图 5</span>
+      <h2>尾段 APU</h2>
+      <p>垂尾、水平安定面与尾锥内的辅助动力装置。</p>
+    </div>
+  </a>
+
+  <a class="card" href="a380-cargo/a380-cargo-light.html">
+    <img src="a380-cargo/shots/s2-door-open-light.png" alt="货舱门示意图，舱门开启" loading="lazy">
+    <div class="txt">
+      <span class="no">图 6</span>
+      <h2>货舱门</h2>
+      <p>前下货舱：上铰链货舱门、LD3 集装箱与滚棒地板。</p>
+    </div>
+  </a>
+
+  <a class="card" href="a380-flaps/a380-flaps-light.html">
+    <img src="a380-flaps/shots/s2-rest-light.png" alt="后缘襟翼示意图" loading="lazy">
+    <div class="txt">
+      <span class="no">图 7</span>
+      <h2>后缘襟翼</h2>
+      <p>富勒襟翼的后移下偏与扰流板升起。</p>
+    </div>
+  </a>
+
+  <details class="about-collapsible">
+    <summary class="about-summary">
+      <span>ℹ️ 关于这套图集说明与资料来源（点击展开/收起）</span>
+      <span class="about-arrow">▾</span>
+    </summary>
+    <div class="about-body">
+      <p>均为示意图：外廓尺寸取自空客 Aircraft Characteristics 与 Facts &amp; Figures，截面形状、翼型、内饰排布等细节为示意。</p>
+      <p>每张图都有浅色与深色两版；各图的资料来源与示意说明见对应目录中的详细解剖解析。各分部页面均设有“回到整机”导航按键与图例折叠开关，方便多终端沉浸式交互阅览。</p>
+    </div>
+  </details>
 </div>
 </main>
 </body>
